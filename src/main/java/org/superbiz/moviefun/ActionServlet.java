@@ -17,7 +17,6 @@
 package org.superbiz.moviefun;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Component;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -30,7 +29,6 @@ import java.util.List;
 /**
  * @version $Revision$ $Date$
  */
-@Component
 public class ActionServlet extends HttpServlet {
 
     private static final long serialVersionUID = -5832176047021911038L;
