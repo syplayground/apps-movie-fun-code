@@ -42,9 +42,15 @@ public class S3Store implements BlobStore {
             byte[] bytes = IOUtils.toByteArray(content);
 
             return Optional.of(new Blob(
+<<<<<<< HEAD
                     name,
                     new ByteArrayInputStream(bytes),
                     tika.detect(bytes)
+=======
+                name,
+                new ByteArrayInputStream(bytes),
+                tika.detect(bytes)
+>>>>>>> f8e290237d287664862c9c8a56dc39c65cdd7947
             ));
         }
     }
@@ -52,11 +58,20 @@ public class S3Store implements BlobStore {
     @Override
     public void deleteAll() {
         List<S3ObjectSummary> summaries = s3
+<<<<<<< HEAD
                 .listObjects(bucketName)
                 .getObjectSummaries();
+=======
+            .listObjects(bucketName)
+            .getObjectSummaries();
+>>>>>>> f8e290237d287664862c9c8a56dc39c65cdd7947
 
         for (S3ObjectSummary summary : summaries) {
             s3.deleteObject(bucketName, summary.getKey());
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f8e290237d287664862c9c8a56dc39c65cdd7947

@@ -12,4 +12,8 @@ public class Blob {
         this.inputStream = inputStream;
         this.contentType = contentType;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f8e290237d287664862c9c8a56dc39c65cdd7947

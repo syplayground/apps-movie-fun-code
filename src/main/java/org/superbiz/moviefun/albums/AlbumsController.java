@@ -10,8 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.superbiz.moviefun.blobstore.Blob;
 import org.superbiz.moviefun.blobstore.BlobStore;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -26,9 +24,13 @@ import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 public class AlbumsController {
 
     private final AlbumsBean albumsBean;
-
     private final BlobStore blobStore;
 
+<<<<<<< HEAD
+    private final BlobStore blobStore;
+
+=======
+>>>>>>> f8e290237d287664862c9c8a56dc39c65cdd7947
     public AlbumsController(AlbumsBean albumsBean, BlobStore blobStore) {
         this.albumsBean = albumsBean;
         this.blobStore = blobStore;
@@ -51,9 +53,15 @@ public class AlbumsController {
     public String uploadCover(@PathVariable long albumId, @RequestParam("file") MultipartFile uploadedFile) throws IOException {
         if (uploadedFile.getSize() > 0) {
             Blob coverBlob = new Blob(
+<<<<<<< HEAD
                     getCoverBlobName(albumId),
                     uploadedFile.getInputStream(),
                     uploadedFile.getContentType()
+=======
+                getCoverBlobName(albumId),
+                uploadedFile.getInputStream(),
+                uploadedFile.getContentType()
+>>>>>>> f8e290237d287664862c9c8a56dc39c65cdd7947
             );
 
             blobStore.put(coverBlob);
@@ -66,6 +74,7 @@ public class AlbumsController {
     public HttpEntity<byte[]> getCover(@PathVariable long albumId) throws IOException, URISyntaxException {
         Optional<Blob> maybeCoverBlob = blobStore.get(getCoverBlobName(albumId));
         Blob coverBlob = maybeCoverBlob.orElseGet(this::buildDefaultCoverBlob);
+<<<<<<< HEAD
 
         byte[] imageBytes = IOUtils.toByteArray(coverBlob.inputStream);
 
@@ -94,6 +103,23 @@ public class AlbumsController {
     }
 
 
+=======
+
+        byte[] imageBytes = IOUtils.toByteArray(coverBlob.inputStream);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(coverBlob.contentType));
+        headers.setContentLength(imageBytes.length);
+
+        return new HttpEntity<>(imageBytes, headers);
+    }
+
+    @DeleteMapping("/covers")
+    public String deleteCovers() {
+        blobStore.deleteAll();
+        return "redirect:/albums";
+    }
+>>>>>>> f8e290237d287664862c9c8a56dc39c65cdd7947
 
     private Blob buildDefaultCoverBlob() {
         ClassLoader classLoader = getClass().getClassLoader();

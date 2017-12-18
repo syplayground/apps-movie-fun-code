@@ -10,4 +10,8 @@ public interface BlobStore {
     Optional<Blob> get(String name) throws IOException;
 
     void deleteAll();
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f8e290237d287664862c9c8a56dc39c65cdd7947
